@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: agentsig-analytics
+    env: docker
+    plan: standard
+    healthCheckPath: /health
+    numInstances: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_PATH
+        value: /data/agentsig.db
+      - key: PORT
+        value: 3000
+      - key: PUBLIC_URL
+        # Render auto-generates a URL; you can override with your custom domain
+        sync: false
+    disk:
+      name: agentsig-data
+      mountPath: /data
+      sizeGB: 1
